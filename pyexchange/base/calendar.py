@@ -50,6 +50,7 @@ class BaseExchangeCalendarEvent(object):
   start = None
   end = None
   location = None
+  is_response_requested = u'true'
   html_body = None
   text_body = None
   attachments = None
@@ -62,7 +63,7 @@ class BaseExchangeCalendarEvent(object):
   _dirty_attributes = set()  # any attributes that have changed, and we need to update in Exchange
 
   # these attributes can be pickled, or output as JSON
-  DATA_ATTRIBUTES = [u'_id', u'subject', u'start', u'end', u'location', u'html_body', u'text_body', u'organizer', u'_attendees', u'_resources']
+  DATA_ATTRIBUTES = [u'_id', u'subject', u'start', u'end', u'location' u'is_response_requested', u'html_body', u'text_body', u'organizer', u'_attendees', u'_resources']
 
   def __init__(self, service, id=None, **kwargs):
     self.service = service

@@ -114,6 +114,7 @@ def new_event(event):
             <t:Start></t:Start>
             <t:End></t:End>
             <t:Location></t:Location>
+            <t:IsResponseRequested></t:IsResponseRequested>
             <t:RequiredAttendees>
                 {% for attendee_email in meeting.required_attendees %}
                 <t:Attendee>
@@ -162,6 +163,7 @@ def new_event(event):
         T.Start(start.strftime(EXCHANGE_DATE_FORMAT)),
         T.End(end.strftime(EXCHANGE_DATE_FORMAT)),
         T.Location(event.location or u''),
+        T.IsResponseRequested(event.is_response_requested)
       )
     ),
     SendMeetingInvitations="SendToAllAndSaveCopy"
@@ -279,6 +281,11 @@ def update_item(event, updated_attributes, send_only_to_changed_attendees=False)
   if u'location' in updated_attributes:
     update_node.append(
       update_property_node(field_uri="calendar:Location", node_to_insert=T.Location(event.location))
+    )
+
+  if u'is_response_requested' in updated_attributes:
+    update_node.append(
+      update_property_node(field_uri="calendar:IsResponseRequested", node_to_insert=T.IsResponseRequested(event.is_response_requested))
     )
 
   if u'attendees' in updated_attributes:

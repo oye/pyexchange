@@ -225,6 +225,7 @@ class Exchange2010CalendarEvent(BaseExchangeCalendarEvent):
       u'end'          : { u'xpath' : u'//m:Items/t:CalendarItem/t:End', u'cast': u'datetime'},  # noqa
       u'html_body'    : { u'xpath' : u'//m:Items/t:CalendarItem/t:Body[@BodyType="HTML"]'},  # noqa
       u'text_body'    : { u'xpath' : u'//m:Items/t:CalendarItem/t:Body[@BodyType="Text"]'},  # noqa
+      u'is_response_requested'     : { u'xpath' : u'//m:Items/t:CalendarItem/t:IsResponseRequested'},  # noqa
     }
 
     return self.service._xpath_to_dict(element=response, property_map=property_map, namespace_map=soap_request.NAMESPACES)
